@@ -5,3 +5,10 @@ edition = "2021"
 authors = ["Alyx Satchell alyxsatchell@gmail.com"]
 
 [dependencies]
+# uncomment once stable
+# crystal_nova = { git = "https://github.com/alyxsatchell/crystal-nova-engine.git"}
+crystal_nova = { path = "../crystal_nova"}
+wgpu = "22.0"
+winit = { version = "0.29", features = ["rwh_05"] }
+bytemuck = { version = "1.16", features = [ "derive" ] }
+pollster = "0.3"
