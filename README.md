@@ -1,0 +1,1 @@
+Project Novablade is a small game based off of the classic arcade game Asteroids as well as a previous game I worked on called Novablade: Prototype. It's primary purpose is to test out the Crystal Nova Engine and is being developed concurrently with it.
