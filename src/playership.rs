@@ -27,7 +27,7 @@ impl<'a> PlayerShip<'a>{
                 position: [0.1, -0.25, 0.],
             },
         ];
-        let indices = &[0,1,2,0,1,3];
+        let indices = &[0,1,2,0,2,3];
         let num_indices = indices.len() as u32;
         PlayerShip { placement, vertices, vertex_buffer: None, indices, index_buffer: None, num_indices}
     }
