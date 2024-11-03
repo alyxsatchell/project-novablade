@@ -10,10 +10,9 @@ fn main() {
 }
 
 async fn run(){
-    let mut player: PlayerShip = PlayerShip::new();
+    let player: PlayerShip = PlayerShip::new();
     let event_loop = EventLoop::new().unwrap();
     let window = WindowBuilder::new().build(&event_loop).unwrap();
     let mut universe = Universe::new(&window, Box::new(player)).await;
     universe.run(event_loop).await;
-    println!("test");
 }
