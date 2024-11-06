@@ -12,19 +12,19 @@ pub struct PlayerShip<'a> {
 
 impl<'a> PlayerShip<'a>{
     pub fn new() -> PlayerShip<'a>{
-        let placement = Placement{ x: 0., y: 0., z: 0. };
+        let placement = Placement{ x: 0., y: 0., z: 0. , r: 0., g: 0.5, b: 0.5};
         let vertices = &[
             Vertex {
-                position: [0., 0.25, 0.],
+                position: [0., 0.05, 0.],
             },
             Vertex {
-                position: [-0.1, -0.25, 0.],
+                position: [-0.025, -0.05, 0.],
             },
             Vertex {
-                position: [0., -0.1, 0.],
+                position: [0., -0.025, 0.],
             },
             Vertex {
-                position: [0.1, -0.25, 0.],
+                position: [0.025, -0.05, 0.],
             },
         ];
         let indices = &[0,1,2,0,2,3];
