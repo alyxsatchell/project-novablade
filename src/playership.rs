@@ -1,4 +1,4 @@
-use crystal_nova::{object::{Object, Placement}, universe::Vertex};
+use crystal_nova::{object::{Object, Placement}, physics::{Physics, Vector}, universe::Vertex};
 use wgpu::util::DeviceExt;
 
 pub struct PlayerShip<'a> {
@@ -8,6 +8,7 @@ pub struct PlayerShip<'a> {
     indices: &'a[u16],
     index_buffer: Option<wgpu::Buffer>,
     num_indices: u32,
+    physics: Physics,
 }
 
 impl<'a> PlayerShip<'a>{
@@ -29,30 +30,30 @@ impl<'a> PlayerShip<'a>{
         ];
         let indices = &[0,1,2,0,2,3];
         let num_indices = indices.len() as u32;
-        PlayerShip { placement, vertices, vertex_buffer: None, indices, index_buffer: None, num_indices}
+        PlayerShip { placement, vertices, vertex_buffer: None, indices, index_buffer: None, num_indices, physics: Physics::new(100.)}
     }
-
 
 }
 
 impl<'a> Object for PlayerShip<'a>{
     fn Up(&mut self) {
-        self.placement.y += 0.001;
+        self.get_physics().add_force(Vector{x: 0., y: 1.});
     }
 
     fn Down(&mut self) {
-        self.placement.y -= 0.001;
+        self.get_physics().add_force(Vector{x: 0., y: -1.});
     }
 
     fn Left(&mut self) {
-        self.placement.x -= 0.001;
+        self.get_physics().add_force(Vector{x: -1., y: 0.});
     }
 
     fn Right(&mut self) {
-        self.placement.x += 0.001;
+        self.get_physics().add_force(Vector{x: 1., y: 0.});
     }
 
     fn placement(&self) -> &Placement {
+        //&Placement::from_vector_to_placement_vector(self.get_physics().get_position(), r, g, b)
         &self.placement
     }
 
@@ -79,5 +80,17 @@ impl<'a> Object for PlayerShip<'a>{
             contents: bytemuck::cast_slice(self.indices),
             usage: wgpu::BufferUsages::INDEX,
         }));
+    }
+
+    fn get_physics(&mut self) -> &mut Physics {
+        &mut self.physics
+    }
+    
+    fn get_position(&self) -> &Vector {
+        self.physics.get_position()
+    }
+    
+    fn update(&mut self, dt: f32) {
+        self.physics.update(dt);
     }
 }
