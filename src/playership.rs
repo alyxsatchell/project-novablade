@@ -36,24 +36,23 @@ impl<'a> PlayerShip<'a>{
 }
 
 impl<'a> Object for PlayerShip<'a>{
-    fn Up(&mut self) {
+    fn up(&mut self) {
         self.get_physics().add_force(Vector{x: 0., y: 1.});
     }
 
-    fn Down(&mut self) {
+    fn down(&mut self) {
         self.get_physics().add_force(Vector{x: 0., y: -1.});
     }
 
-    fn Left(&mut self) {
+    fn left(&mut self) {
         self.get_physics().add_force(Vector{x: -1., y: 0.});
     }
 
-    fn Right(&mut self) {
+    fn right(&mut self) {
         self.get_physics().add_force(Vector{x: 1., y: 0.});
     }
 
     fn placement(&self) -> &Placement {
-        //&Placement::from_vector_to_placement_vector(self.get_physics().get_position(), r, g, b)
         &self.placement
     }
 
